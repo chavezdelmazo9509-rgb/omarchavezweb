@@ -1,0 +1,940 @@
+/* =========================================================
+   ETAPA 2 · DISEÑO BASE — Omar Chavez Web
+   Colores de marca: rojo volcán, negro y dorado
+   ========================================================= */
+
+/* ---------- 1. VARIABLES (tus colores y fuentes en un solo lugar) ---------- */
+:root {
+  --negro: #0b0809;          /* fondo principal */
+  --negro-2: #15100f;        /* fondo de tarjetas */
+  --rojo: #e2342b;           /* rojo volcán (acento) */
+  --rojo-oscuro: #8f1b16;
+  --dorado: #e2b25c;         /* dorado (precios y detalles) */
+  --texto: #f5efe9;          /* texto principal */
+  --gris: #b3a69c;           /* texto secundario */
+  --borde: rgba(226, 178, 92, 0.18);
+  --verde-wsp: #25d366;      /* botón de WhatsApp */
+
+  --fuente-titulos: "Syne", "Arial Black", sans-serif;
+  --fuente-texto: "Manrope", system-ui, sans-serif;
+
+  --radio: 18px;             /* esquinas redondeadas */
+  --ancho: 1120px;           /* ancho máximo del contenido */
+}
+
+/* ---------- 2. BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--negro);
+  color: var(--texto);
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  line-height: 1.6;
+  /* brillo rojo suave arriba, como lava */
+  background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(226, 52, 43, 0.28), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* Todas las secciones centradas y con aire */
+section {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 90px 20px;
+}
+
+h2 {
+  font-size: clamp(30px, 5vw, 46px);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* ---------- 3. CABECERA ---------- */
+header {
+  position: sticky;            /* se queda arriba al bajar */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(11, 8, 9, 0.75);
+  backdrop-filter: blur(12px); /* efecto vidrio */
+  border-bottom: 1px solid var(--borde);
+}
+
+.logo { font-family: var(--fuente-titulos); font-weight: 800; font-size: 20px; }
+.logo span { color: var(--rojo); }
+
+.btn-header {
+  border: 1px solid var(--dorado);
+  color: var(--dorado);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.25s, color 0.25s;
+}
+.btn-header:hover { background: var(--dorado); color: var(--negro); }
+
+/* ---------- 4. PORTADA ---------- */
+.hero {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.etiqueta {
+  color: var(--dorado);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid var(--borde);
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 8vw, 84px);
+  max-width: 14ch;
+}
+.hero h1 span {
+  color: var(--rojo);
+  /* brillo de lava detrás de la palabra */
+  text-shadow: 0 0 40px rgba(226, 52, 43, 0.6);
+}
+
+.subtitulo { color: var(--gris); font-size: 18px; max-width: 46ch; }
+
+/* Botón principal (el más importante de la página) */
+.btn-principal {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+  color: #fff;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 16px 34px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(226, 52, 43, 0.4);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-principal:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(226, 52, 43, 0.6);
+}
+
+/* ---------- 5. TARJETAS (beneficios, paquetes, trabajos) ---------- */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tarjeta {
+  background: var(--negro-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 30px 26px;
+}
+.tarjeta h3 { font-size: 22px; margin-bottom: 10px; }
+.tarjeta p { color: var(--gris); }
+
+/* Paquetes */
+.precio {
+  font-family: var(--fuente-titulos);
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--dorado) !important;
+  margin: 6px 0 18px;
+}
+.paquete ul { list-style: none; display: grid; gap: 10px; }
+.paquete li::before { content: "✓ "; color: var(--rojo); font-weight: 800; }
+
+/* El paquete recomendado resalta */
+.destacado {
+  border-color: var(--rojo);
+  box-shadow: 0 0 0 1px var(--rojo), 0 20px 50px rgba(226, 52, 43, 0.25);
+  position: relative;
+}
+.destacado::before {
+  content: "Recomendado";
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--rojo);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.nota { text-align: center; color: var(--gris); margin-top: 26px; }
+
+/* ---------- 6. RESEÑAS ---------- */
+blockquote {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--negro-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 36px 28px;
+  font-size: 20px;
+}
+cite { display: block; margin-top: 14px; color: var(--dorado); font-style: normal; font-size: 15px; }
+
+/* ---------- 7. PREGUNTAS FRECUENTES ---------- */
+#preguntas { max-width: 760px; }
+details {
+  background: var(--negro-2);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+}
+summary { cursor: pointer; font-weight: 700; font-size: 17px; }
+details p { color: var(--gris); margin-top: 10px; }
+details[open] { border-color: var(--rojo); }
+
+/* ---------- 8. LLAMADO FINAL ---------- */
+.cta-final {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(226, 52, 43, 0.18), rgba(226, 178, 92, 0.08));
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  margin-bottom: 60px;
+}
+.cta-final h2 { margin-bottom: 28px; }
+
+/* ---------- 9. PIE DE PÁGINA ---------- */
+footer {
+  text-align: center;
+  padding: 30px 20px 100px;
+  color: var(--gris);
+  font-size: 14px;
+  border-top: 1px solid var(--borde);
+}
+footer a:hover { color: var(--dorado); }
+
+/* ---------- 10. BOTÓN FLOTANTE DE WHATSAPP ---------- */
+.whatsapp-flotante {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  background: var(--verde-wsp);
+  color: #fff;
+  font-weight: 800;
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+}
+
+/* ---------- 11. CELULAR (pantallas pequeñas) ---------- */
+@media (max-width: 600px) {
+  section { padding: 64px 16px; }
+  .hero { min-height: 80vh; }
+  .subtitulo { font-size: 16px; }
+  .btn-principal { width: 100%; text-align: center; }
+  .logo { font-size: 17px; }
+}
+
+/* =========================================================
+   ETAPA 3 · EFECTOS 3D
+   ========================================================= */
+
+/* ---------- A. Piso 3D en la portada (rejilla roja que se pierde al fondo) ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  perspective: 600px;            /* "distancia" del ojo: crea la profundidad */
+}
+.hero > * { position: relative; z-index: 1; }   /* el texto va encima del piso */
+
+.hero .piso-3d {
+  position: absolute;
+  z-index: 0;
+  left: -150%;
+  right: -150%;
+  bottom: 0;
+  height: 70%;
+  background-image:
+    linear-gradient(rgba(226, 52, 43, 0.7) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226, 52, 43, 0.7) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: rotateX(72deg);       /* acuesta la rejilla como un piso */
+  transform-origin: bottom center;
+  /* se desvanece hacia el horizonte */
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+          mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+  pointer-events: none;
+}
+
+/* ---------- B. Título con volumen (capas de sombra = letras "gruesas") ---------- */
+.hero h1 {
+  text-shadow:
+    0 1px 0 #c9bfb7,
+    0 2px 0 #a3978e,
+    0 3px 0 #7d726a,
+    0 4px 0 #5a504a,
+    0 12px 24px rgba(0, 0, 0, 0.6);
+}
+.hero h1 span {
+  text-shadow:
+    0 1px 0 #b82a22,
+    0 2px 0 #96221b,
+    0 3px 0 #741a15,
+    0 4px 0 #52120f,
+    0 0 40px rgba(226, 52, 43, 0.6);
+}
+
+/* ---------- C. Tarjetas 3D que se inclinan con el mouse ---------- */
+
+.tarjeta {
+  position: relative;
+  transform-style: preserve-3d;        /* permite que el contenido "flote" */
+  transition: transform 0.2s ease-out, border-color 0.3s, box-shadow 0.3s;
+  will-change: transform;
+}
+.tarjeta:hover {
+  border-color: rgba(226, 178, 92, 0.5);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* El contenido sale hacia adelante (efecto de capas) */
+.tarjeta h3,
+.tarjeta .precio { transform: translateZ(40px); }
+.tarjeta p,
+.tarjeta ul      { transform: translateZ(20px); }
+
+/* Brillo que sigue al mouse (lo mueve script.js con --x y --y) */
+.tarjeta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+              rgba(226, 178, 92, 0.18), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.tarjeta:hover::after { opacity: 1; }
+
+/* En celular no hay mouse: se queda plano, pero se ve bien */
+@media (hover: none) {
+  .tarjeta h3, .tarjeta .precio, .tarjeta p, .tarjeta ul { transform: none; }
+}
+
+/* =========================================================
+   ETAPA 3.5 · FONDO EN MOVIMIENTO (para que no se vea vacía)
+   ========================================================= */
+
+/* ---------- A. Capa de fondo fija detrás de toda la página ---------- */
+.fondo-animado {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Luces de lava borrosas que flotan despacio */
+.luz {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+.luz-1 {
+  width: 520px; height: 520px;
+  background: #e2342b;
+  opacity: 0.35;
+  top: -12%; left: -12%;
+  animation: flotar-1 18s ease-in-out infinite alternate;
+}
+.luz-2 {
+  width: 440px; height: 440px;
+  background: #e2b25c;
+  opacity: 0.16;
+  bottom: -15%; right: -10%;
+  animation: flotar-2 22s ease-in-out infinite alternate;
+}
+.luz-3 {
+  width: 380px; height: 380px;
+  background: #8f1b16;
+  opacity: 0.4;
+  top: 45%; left: 45%;
+  animation: flotar-3 26s ease-in-out infinite alternate;
+}
+@keyframes flotar-1 { to { transform: translate(55vw, 35vh) scale(1.2); } }
+@keyframes flotar-2 { to { transform: translate(-50vw, -45vh) scale(0.9); } }
+@keyframes flotar-3 { to { transform: translate(-35vw, -30vh) scale(1.3); } }
+
+/* Puntitos de fondo (textura tecnológica) que se desvanecen en los bordes */
+.fondo-animado::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(245, 239, 233, 0.09) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+}
+
+/* ---------- B. Chispas que suben (las dibuja script.js) ---------- */
+#chispas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- C. El piso 3D de la portada avanza hacia ti ---------- */
+.hero .piso-3d { animation: avanzar 2.5s linear infinite; }
+@keyframes avanzar { to { background-position: 0 64px, 0 0; } }
+
+/* ---------- D. Tarjetas de vidrio: dejan ver el fondo animado ---------- */
+.tarjeta,
+blockquote,
+details {
+  background: rgba(21, 16, 15, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ---------- E. Si la persona pidió "reducir movimiento", todo quieto ---------- */
+/* Modo "reducir movimiento": no todo quieto, solo más suave y lento */
+@media (prefers-reduced-motion: reduce) {
+  .luz-1 { animation-duration: 40s; }
+  .luz-2 { animation-duration: 48s; }
+  .luz-3 { animation-duration: 56s; }
+  .hero .piso-3d { animation-duration: 8s; }
+}
+
+/* =========================================================
+   BIT · La mascota de la marca
+   ========================================================= */
+
+/* ---------- Portada: texto a la izquierda, Bit a la derecha ---------- */
+.hero-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-bit {
+  position: relative;
+  width: 260px;
+}
+.hero-bit img {
+  width: 100%;
+  height: auto;
+  /* brillo rojo alrededor de Bit */
+  filter: drop-shadow(0 20px 40px rgba(226, 52, 43, 0.45));
+  animation: bit-flota 4s ease-in-out infinite;
+}
+@keyframes bit-flota {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-16px) rotate(2deg); }
+}
+
+/* Globo de diálogo, como en un videojuego */
+.globo {
+  position: absolute;
+  top: -10px;
+  left: -40px;
+  z-index: 2;
+  background: var(--texto);
+  color: var(--negro);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 14px 14px 14px 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  animation: globo-aparece 0.6s 0.8s both;
+}
+.globo b { color: var(--rojo); }
+@keyframes globo-aparece {
+  from { opacity: 0; transform: scale(0.6) translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* En PC: dos columnas (texto + Bit) */
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .hero-texto { align-items: flex-start; flex: 1; }
+  .hero-bit { width: 340px; flex-shrink: 0; }
+  .globo { left: -70px; top: 10px; font-size: 15px; }
+}
+
+/* En celular: Bit arriba y más pequeño */
+@media (max-width: 899px) {
+  .hero-bit { order: -1; width: 170px; margin-top: 10px; }
+  .globo { left: auto; right: -90px; top: 0; font-size: 12px; }
+}
+
+/* ---------- Títulos con Bit al lado ---------- */
+.titulo-bit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.titulo-bit h2 { margin-bottom: 0; }
+.titulo-bit img {
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(226, 52, 43, 0.4));
+  animation: bit-flota 4s ease-in-out infinite;
+}
+
+/* ---------- Llamado final: Bit celebrando ---------- */
+.bit-celebra {
+  width: 150px;
+  height: auto;
+  margin: 0 auto 10px;
+  display: block;
+  filter: drop-shadow(0 15px 30px rgba(226, 178, 92, 0.4));
+  animation: bit-flota 3s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+  .titulo-bit img { width: 64px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bit img, .titulo-bit img, .bit-celebra { animation-duration: 7s; }
+}
+
+/* El botón flotante de WhatsApp se esconde en la portada
+   (ahí ya está el botón grande) y aparece al bajar */
+.whatsapp-flotante { transition: opacity 0.3s, transform 0.3s; }
+.whatsapp-flotante.oculto {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+/* =========================================================
+   ETAPA 4 · MOVIMIENTOS
+   ========================================================= */
+
+/* ---------- A. Entrada de la portada (aparece en orden al abrir) ---------- */
+.hero-texto > * { animation: entrar 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.hero-texto > :nth-child(1) { animation-delay: 0.1s; }
+.hero-texto > :nth-child(2) { animation-delay: 0.25s; }
+.hero-texto > :nth-child(3) { animation-delay: 0.45s; }
+.hero-texto > :nth-child(4) { animation-delay: 0.6s; }
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- B. Aparecer al bajar (script.js pone y quita estas clases) ---------- */
+.aparecer {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.aparecer.visible { opacity: 1; transform: none; }
+
+/* ---------- C. Botón principal que "late" (onda que sale del botón) ---------- */
+.btn-principal { position: relative; }
+.btn-principal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  animation: latido 2.2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes latido {
+  0%   { box-shadow: 0 0 0 0 rgba(226, 52, 43, 0.7); }
+  70%  { box-shadow: 0 0 0 18px rgba(226, 52, 43, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(226, 52, 43, 0); }
+}
+
+/* ---------- D. Cifras con contador ---------- */
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.cifra {
+  text-align: center;
+  background: rgba(21, 16, 15, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 26px 14px;
+}
+.numero {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  color: var(--dorado);
+  text-shadow: 0 0 24px rgba(226, 178, 92, 0.35);
+  font-variant-numeric: tabular-nums;   /* los números no "bailan" al contar */
+}
+.cifra p { color: var(--gris); font-size: 14px; margin-top: 4px; }
+
+@media (max-width: 700px) {
+  .cifras { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- E. Modo "reducir movimiento": solo aparece suave, sin saltos ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .aparecer { transform: none; }
+  .hero-texto > * { animation-name: aparecer-suave; }
+  .btn-principal::after { animation-duration: 4s; }
+}
+@keyframes aparecer-suave { from { opacity: 0; } to { opacity: 1; } }
+
+/* =========================================================
+   EXTRA · ESTELA DEL CURSOR (cometa rojo y dorado)
+   ========================================================= */
+#estela-cursor {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;          /* encima de todo */
+  pointer-events: none;   /* no bloquea clics */
+}
+
+/* ---------- 4 paquetes: entran en una fila en PC ---------- */
+#paquetes .tarjetas { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.precio small {
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gris);
+  margin-right: 4px;
+}
+
+/* Precios alineados: el "desde" va arriba, en pequeño, y el número nunca se parte */
+.paquete .precio {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 84px;
+  white-space: nowrap;
+  line-height: 1.05;
+}
+.precio small { margin: 0 0 4px; }
+
+/* =========================================================
+   TRABAJOS REALIZADOS · tarjetas con captura
+   ========================================================= */
+.trabajos { grid-template-columns: repeat(3, 1fr); }
+.trabajo { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.trabajo img {
+  width: 100%;
+  height: auto;            /* sin esto, el alto del HTML (600) estira la imagen */
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border-bottom: 1px solid var(--borde);
+  transition: transform 0.6s ease;
+}
+.trabajo:hover img { transform: scale(1.04); }
+.trabajo-info { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 8px; }
+.trabajo-info h3 { margin: 0; }
+
+.chip {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rojo);
+  border: 1px solid rgba(226, 52, 43, 0.5);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.chip.propio { color: var(--dorado); border-color: rgba(226, 178, 92, 0.5); }
+
+.ver-mas { color: var(--dorado); font-weight: 700; margin-top: 4px; }
+.ver-mas:hover { text-decoration: underline; }
+
+/* Velocity, el trabajo principal, ocupa 2 columnas en PC */
+.destacado-trabajo { grid-column: span 2; }
+.destacado-trabajo img { aspect-ratio: 16 / 8; }
+
+@media (max-width: 900px) {
+  .trabajos { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .trabajos { grid-template-columns: 1fr; }
+  .destacado-trabajo { grid-column: auto; }
+  .destacado-trabajo img { aspect-ratio: 16 / 10; }
+}
+
+/* =========================================================
+   REDES SOCIALES · íconos con link directo
+   ========================================================= */
+.redes-titulo {
+  color: var(--texto);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.redes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.red {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 22px;
+  color: var(--texto);
+  background: rgba(21, 16, 15, 0.7);
+  border: 1px solid var(--borde);
+  transition: transform 0.25s, background 0.25s, box-shadow 0.25s, color 0.25s;
+}
+.red:hover { transform: translateY(-4px) scale(1.08); color: #fff; }
+/* al pasar el mouse, cada ícono toma el color de su red */
+.red.wsp:hover  { background: #25d366; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45); }
+.red.fb:hover   { background: #1877f2; box-shadow: 0 10px 25px rgba(24, 119, 242, 0.45); }
+.red.ig:hover   { background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7); box-shadow: 0 10px 25px rgba(238, 42, 123, 0.45); }
+.red.tt:hover   { background: #000; box-shadow: 0 0 0 2px #25f4ee, 0 10px 25px rgba(254, 44, 85, 0.5); }
+.red.mail:hover { background: var(--rojo); box-shadow: 0 10px 25px rgba(226, 52, 43, 0.45); }
+
+/* =========================================================
+   MEJORAS DE LA AUDITORÍA
+   ========================================================= */
+
+/* Beneficios con ícono en círculo rojo (estilo de tu marca) */
+.icono {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  font-size: 22px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+  box-shadow: 0 8px 22px rgba(226, 52, 43, 0.45);
+  transform: translateZ(30px);
+}
+
+/* Menos espacio vacío entre secciones */
+section { padding-top: 70px; padding-bottom: 70px; }
+@media (max-width: 600px) { section { padding-top: 56px; padding-bottom: 56px; } }
+
+/* Ícono dentro del botón flotante */
+.whatsapp-flotante i { font-size: 20px; margin-right: 4px; vertical-align: -2px; }
+
+/* =========================================================
+   MEJORAS FINALES
+   ========================================================= */
+
+/* El precio de la portada no se parte en dos líneas */
+.sin-cortar { white-space: nowrap; }
+
+/* Banner de la promo de Navidad */
+.promo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 720px;
+  margin: -16px auto 34px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(226, 52, 43, 0.22), rgba(226, 178, 92, 0.18));
+  border: 1px solid rgba(226, 178, 92, 0.45);
+  text-align: left;
+}
+.promo p { margin: 0; color: var(--texto); font-size: 15px; }
+.promo b { color: var(--dorado); }
+.promo-icono {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: #fff;
+  animation: latido-regalo 2.4s ease-in-out infinite;
+}
+@keyframes latido-regalo { 50% { transform: scale(1.12) rotate(-8deg); } }
+.promo-dias {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--rojo);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+}
+.promo-dias:empty { display: none; }
+@media (max-width: 600px) { .promo { border-radius: 18px; margin-top: -8px; } }
+
+/* Teclado: se ve claramente dónde estás al navegar con Tab (accesibilidad) */
+a:focus-visible, summary:focus-visible, button:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Celular: sin desenfoque de vidrio (es lo que más pone lenta la página en equipos baratos) */
+@media (max-width: 600px) {
+  .tarjeta, blockquote, details, .cifra, header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .tarjeta, blockquote, details, .cifra { background: rgba(21, 16, 15, 0.88); }
+  header { background: rgba(11, 8, 9, 0.95); }
+  .luz { filter: blur(60px); }
+}
+
+/* =========================================================
+   RESEÑAS · tarjetas con estrellas
+   ========================================================= */
+.calificacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: -10px auto 34px;
+}
+.nota-grande {
+  font-family: var(--fuente-titulos);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--dorado);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(226, 178, 92, 0.35);
+}
+.calificacion p { color: var(--gris); font-size: 14px; margin: 2px 0 0; }
+.estrellas { color: #f5c04a; font-size: 22px; letter-spacing: 3px; text-shadow: 0 0 12px rgba(245, 192, 74, 0.5); }
+
+.resenas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.resena {
+  max-width: none;
+  margin: 0;
+  text-align: left;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.resena .estrellas { font-size: 18px; }
+.resena p { margin: 0; flex: 1; }
+.resena cite { display: flex; align-items: center; gap: 12px; margin-top: 4px; color: var(--texto); font-size: 15px; }
+.resena cite b { display: block; }
+.resena cite small { color: var(--gris); font-size: 13px; }
+.avatar {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+}
+#resenas .nota a { color: var(--dorado); }
+#resenas .nota a:hover { text-decoration: underline; }
+
+/* =========================================================
+   FORMULARIO DE CONTACTO (dentro del llamado final)
+   ========================================================= */
+.cta-sub { color: var(--gris); margin: -12px auto 28px; max-width: 46ch; }
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+}
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo-ancho { grid-column: 1 / -1; }
+.campo label { font-weight: 700; font-size: 14px; color: var(--texto); }
+.campo label small { color: var(--gris); font-weight: 400; }
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;               /* 16px evita que el iPhone haga zoom al escribir */
+  color: var(--texto);
+  background: rgba(11, 8, 9, 0.75);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.campo textarea { resize: vertical; }
+.campo select option { background: var(--negro-2); }
+.campo input::placeholder,
+.campo textarea::placeholder { color: rgba(179, 166, 156, 0.6); }
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px rgba(226, 178, 92, 0.2);
+}
+
+.formulario .btn-principal {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  justify-self: center;
+  min-width: 280px;
+}
+.formulario .btn-principal i { font-size: 20px; margin-right: 6px; vertical-align: -2px; }
+.form-nota { text-align: center; color: var(--gris); font-size: 13px; margin: 0; }
+
+@media (max-width: 700px) {
+  .formulario { grid-template-columns: 1fr; }
+  .formulario .btn-principal { min-width: 0; width: 100%; }
+}
