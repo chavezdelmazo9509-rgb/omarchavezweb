@@ -946,3 +946,22 @@ a:focus-visible, summary:focus-visible, button:focus-visible {
   .logo { font-size: 15px; }
   .btn-header { padding: 7px 14px; font-size: 13px; }
 }
+
+
+/* ---------- Ajustes (nov 2026) ---------- */
+/* Reseña principal un poco más grande */
+.resena.destacada { grid-column: 1 / -1; font-size: 21px; }
+/* Botón hacia el portafolio 3D */
+.ver-portafolio { text-align: center; margin: 34px 0 0; }
+.ver-portafolio a {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid var(--dorado); color: var(--dorado);
+  padding: 13px 24px; border-radius: 999px; font-weight: 700;
+  transition: background 0.25s, color 0.25s;
+}
+.ver-portafolio a:hover { background: var(--dorado); color: var(--negro); }
+/* En celular la portada empieza arriba, para que el título no quede tapado */
+@media (max-width: 899px) {
+  .hero { justify-content: flex-start; padding-top: 24px; padding-bottom: 40px; min-height: auto; }
+}
+@media (min-width: 640px) { .resenas-grid { grid-template-columns: repeat(2, 1fr); } }
