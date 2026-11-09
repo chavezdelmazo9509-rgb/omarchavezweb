@@ -965,3 +965,6 @@ a:focus-visible, summary:focus-visible, button:focus-visible {
   .hero { justify-content: flex-start; padding-top: 24px; padding-bottom: 40px; min-height: auto; }
 }
 @media (min-width: 640px) { .resenas-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Las capturas de los trabajos se ven completas, sin cortar los costados */
+.trabajo img { object-fit: contain; object-position: center; background: #0b0809; }
